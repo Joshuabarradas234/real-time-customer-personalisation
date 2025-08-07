@@ -86,27 +86,28 @@ def lambda_handler(event, context):
 ## 📊 CloudWatch Monitoring & Metrics
 
 **Figure 2: CloudWatch Alarm for InsertError**  
-*Shows alarm triggering on Lambda insert failures.*  
+*AWS API Gateway “Logs and Tracing” settings (initial state) for the dev deployment stage of the recommendation API. At this stage, CloudWatch Logs are disabled and no detailed metrics or tracing are enabled – this is the default configuration before any monitoring features are turned on.*  
 ![Figure 2 – InsertError Alarm](Figure%202.png)
 
 **Figure .3: Logging level in API Gateway**  
-*Shows log level updated to 'Errors and info' with execution logging enabled.*  
+*: Updating the log level in API Gateway to “Errors and info”. In this screenshot, the CloudWatch log level is being changed from Off to Errors and Info, which enables capturing both successful requests and errors. This step is part of configuring the API Gateway to record detailed execution information for the recommendation service.*  
 ![Figure .3 – API Gateway Logging](Figure%203.png)
 
 **Figure .4: Enabling X-Ray tracing in Lambda**  
-*Enables request tracing across API Gateway → Lambda → DynamoDB.*  
+*: Confirmation of successful logging update in API Gateway. After saving the settings, AWS provides a notification confirming that logging and tracing have been enabled for the stage. This includes enabling CloudWatch Logs at the specified level, turning on Detailed Metrics, and activating X-Ray tracing for request workflows.*  
 ![Figure .4 – X-Ray Tracing](Figure%204.png)
 
 **Figure .5: CloudWatch log showing full end-to-end receipt**  
-*Confirms data ingestion, storage, and log stream completion.*  
+*Logs and Tracing configuration panel after enabling all options. This screenshot shows that CloudWatch Logs are now set to capture Errors and Info, Detailed Metrics collection is active, and Data Tracing (X-Ray) is enabled for the dev stage. The API is now fully instrumented to collect performance and diagnostic data.*  
 ![Figure .5 – End-to-End Log](Figure%205.png)
 
 **Figure .6: Custom CloudWatch metric for success tracking**  
-*Tracks successful customer interest submissions.*  
+*CloudWatch verification of enabled logging for the LiveLoungeAPI. This view confirms that the LiveLoungeAPI’s CloudWatch log group and metrics are receiving data. With logging and monitoring active, the team can use CloudWatch dashboards, set up alarms for high error rates or latency, and perform root cause analysis on any invocation issues in the recommendation system.*  
 ![Figure .6 – CloudWatch Success Metric](Figure%206.png)
 
 **Figure .7: Dev stage with logging and tracing enabled**  
-*Shows settings on the API Gateway stage level.*  
+*Logs & Tracing Settings Page
+This screenshot shows the default Logs and Tracing settings for the dev stage of the LiveLoungeAPI in API Gateway. At this point, CloudWatch logs are disabled, and metrics or tracing options have not been activated yet. This serves as the initial baseline prior to enabling observability features.*  
 ![Figure .7 – Dev Stage Logging](Figure%207.png)
 
 **Figure .8: API test result in Postman**  
