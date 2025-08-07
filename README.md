@@ -1,7 +1,3 @@
-
-markdown
-Copy
-Edit
 # Real-Time Personalised Customer Experience Engine (AWS-Powered)
 
 ## 📌 Summary
@@ -13,7 +9,7 @@ This project simulates a personalised marketing engine using serverless AWS tool
 
 **Figure A.1: High-Level Architecture Diagram**  
 *This figure shows how user interest data flows from the frontend through API Gateway to Lambda, DynamoDB, and back. It also shows CloudWatch logging for tracing requests and a custom metrics alarm.*  
-`![Figure A.1 Placeholder – Insert image URL here]`
+![Figure A.1 – Architecture Diagram](Figure%201.png)
 
 ---
 
@@ -21,120 +17,153 @@ This project simulates a personalised marketing engine using serverless AWS tool
 
 - **Amazon API Gateway**: REST API endpoint to receive customer preferences.
 - **AWS Lambda**: Processes requests and stores data in DynamoDB.
-- **Amazon DynamoDB**: Stores user interest and location data.
-- **Amazon CloudWatch**: Tracks metrics, logs, alarms, and traces.
+- **Amazon DynamoDB**: Stores customer interest and location data.
+- **Amazon CloudWatch**: Provides monitoring, custom metrics, logs, and tracing.
+- **AWS X-Ray**: Enables tracing across Lambda/API Gateway for debugging.
 
 ---
 
-## 🔄 System Flow Summary
+## 💡 Key Features
 
-1. User submits interest via frontend.
-2. API Gateway forwards to Lambda.
-3. Lambda writes data to DynamoDB.
-4. CloudWatch captures logs, metrics, and trace for observability.
+- POST endpoint `/recommend` to receive customer interest and location
+- Serverless pipeline (API → Lambda → DynamoDB)
+- Real-time logging and error monitoring with CloudWatch
+- Tracing via AWS X-Ray for full observability
+- Custom CloudWatch metrics and alarms for failures/success
+- Data-driven personalisation simulation
 
 ---
 
-## 🧪 Sample JSON Payload
+## 🧪 Sample Payload (JSON)
 
 ```json
 {
-  "customerId": "12345",
-  "interest": "electronics",
+  "customer_id": "12345",
+  "interest": "organic_food",
   "location": "Cape Town"
 }
-Lambda Function Snippet (Python)
-python
-Always show details
+```
 
-Copy
-import boto3
+---
+
+## 🧾 Lambda Snippet (Python)
+
+```python
 import json
+import boto3
+import time
 import os
 
-dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table(os.environ['CustomerTable'])
-
 def lambda_handler(event, context):
-    data = json.loads(event['body'])
-    table.put_item(Item={
-        'customerId': data['customerId'],
-        'interest': data['interest'],
-        'location': data['location']
-    })
-    return {
-        'statusCode': 200,
-        'body': json.dumps({'message': 'Success'})
+    dynamodb = boto3.resource('dynamodb')
+    table = dynamodb.Table(os.environ['CustomerInterestTable'])
+
+    payload = json.loads(event['body'])
+    timestamp = int(time.time())
+
+    item = {
+        'customer_id': payload['customer_id'],
+        'timestamp': timestamp,
+        'interest': payload['interest'],
+        'location': payload['location']
     }
-📊 CloudWatch Monitoring & Logs
-Figure A.2 – InsertError Alarm Configuration
-Shows CloudWatch alarm setup for failed insertions in Lambda logs. This ensures real-time notification of function errors affecting customer data handling.
 
-Figure A.3 – API Gateway Logging Enabled
-CloudWatch log level is changed from Off to “Errors and Info”, enabling both success and error logs for all incoming API requests.
+    try:
+        table.put_item(Item=item)
+        return {
+            'statusCode': 200,
+            'body': json.dumps({'message': 'Customer preference recorded.'})
+        }
+    except Exception as e:
+        return {
+            'statusCode': 500,
+            'body': json.dumps({'error': str(e)})
+        }
+```
 
-Figure A.4 – API Gateway Tracing Activated
-X-Ray tracing enabled through API Gateway for the recommendation API. This helps track end-to-end request journeys for performance insights.
+---
 
-Figure A.5 – Full Observability Enabled (API Gateway)
-This screenshot shows the active state of all observability settings after configuration.
-Under the Logs and Tracing panel:
-• CloudWatch Logs set to Errors and info
-• Detailed Metrics shown as Active
-• Data Tracing marked as Active
+## 📊 CloudWatch Monitoring & Metrics
 
-Figure A.6 – CloudWatch Metrics for Success Tracking
-Visualises a custom CloudWatch metric tracking successful Lambda executions, confirming API health over time.
+**Figure A.2: CloudWatch Alarm for InsertError**  
+*Shows alarm triggering on Lambda insert failures.*  
+![Figure A.2 – InsertError Alarm](Figure%202.png)
 
-Figure A.7 – Default Logs and Tracing Configuration
-Shows the default API Gateway stage settings before observability configuration. Logging, tracing, and metrics are disabled at this stage.
+**Figure A.3: Logging level in API Gateway**  
+*Shows log level updated to 'Errors and info' with execution logging enabled.*  
+![Figure A.3 – API Gateway Logging](Figure%203.png)
 
-Figure A.8 – Successful Logging Update Notification
-Confirms CloudWatch Logs, Metrics, and Tracing were successfully enabled for the dev stage of the API Gateway.
+**Figure A.4: Enabling X-Ray tracing in Lambda**  
+*Enables request tracing across API Gateway → Lambda → DynamoDB.*  
+![Figure A.4 – X-Ray Tracing](Figure%204.png)
 
-Figure A.9 – Final Observability State (Post-Configuration)
-Logs and Tracing configuration panel after enabling all options.
-• CloudWatch Logs: Errors and Info
-• Metrics: Enabled
-• Tracing: Active (X-Ray)
+**Figure A.5: CloudWatch log showing full end-to-end receipt**  
+*Confirms data ingestion, storage, and log stream completion.*  
+![Figure A.5 – End-to-End Log](Figure%205.png)
 
-Figure A.10 – CloudWatch Dashboard (LiveLoungeAPI)
-Confirms real-time observability with API latency, error rate, and invocation count tracking.
+**Figure A.6: Custom CloudWatch metric for success tracking**  
+*Tracks successful customer interest submissions.*  
+![Figure A.6 – CloudWatch Success Metric](Figure%206.png)
 
-✅ Monitoring Summary
-Metric	Description	Threshold
-Lambda Error Rate	Tracks failed inserts to DynamoDB	< 1%
-API Gateway Latency	Monitors API response time	< 300ms
-X-Ray Tracing Coverage	% of requests traced end-to-end	> 95%
-CloudWatch Alarm Trigger	Detects anomalies in request handling	Immediate
+**Figure A.7: Dev stage with logging and tracing enabled**  
+*Shows settings on the API Gateway stage level.*  
+![Figure A.7 – Dev Stage Logging](Figure%207.png)
 
-🔐 Compliance Considerations
-POPIA: Data captured is anonymised, stored securely with IAM-based access.
+**Figure A.8: API test result in Postman**  
+*Postman POST response confirms end-to-end delivery and response.*  
+![Figure A.8 – Postman Test](Figure%208.png)
 
-Audit Logging: All API calls and Lambda executions are logged.
+**Figure A.9: DynamoDB table view**  
+*Shows structure of CustomerInterest table: customer_id, timestamp, interest, location.*  
+![Figure A.9 – DynamoDB Table](Figure%209.png)
 
-Least Privilege: Lambda roles are scoped to only DynamoDB put access.
+**Figure A.10: CloudWatch Logs Summary View**  
+*Aggregated view showing Lambda logs for multiple inserts.*  
+![Figure A.10 – CloudWatch Summary](Figure%2010.png)
 
-💡 Future Enhancements
-Amazon Personalize for advanced recommendations
+---
 
-Integrate SageMaker for user segmentation
+## 🔐 IAM & Security
 
-Add mobile push via Amazon Pinpoint
+- Lambda IAM role with least privilege (PutItem only)
+- CloudWatch permissions for logs/metrics
+- Environment variables for table names
+- No PII exposed in logs or metrics
 
-📁 Suggested Repo Structure
-python
-Always show details
+---
 
-Copy
-customer-personalisation-api/
-├── lambda/                    # Lambda function code
-├── docs/                     # Diagrams and screenshots
-├── cloudwatch/               # Monitoring config and metrics
-├── frontend/                 # (Optional) Web form for input
-└── README.md                 # This file
-🧑‍💻 Author
-Joshua Barradas
-AWS Projects Portfolio
-Cloud & AI Solutions Architect
-LinkedIn: linkedin.com/in/joshua-barradas-433292212
+## 📁 Suggested Repo Structure
+
+```
+personalised-customer-api/
+├── lambda/                # Lambda function code
+├── images/                # Architecture and log screenshots
+├── monitoring/            # CloudWatch metrics setup
+├── docs/                  # Word docs, explanations
+└── README.md              # This file
+```
+
+---
+
+## 🔗 Use Cases
+
+- Real-time targeted promotions
+- Location-based marketing messages
+- Event-triggered customer engagement
+
+---
+
+## 🧩 Future Extensions
+
+- Add Personalize or Bedrock for actual ML-based recommendations
+- Store historical data in S3 for analytics
+- Integrate with SES or SNS for outbound campaigns
+
+---
+
+## 🙋 Contact
+
+**Joshua Barradas**  
+GitHub: [@Joshuabarradas234](https://github.com/Joshuabarradas234)  
+Email: barradasjoshua48@gmail.com  
+Location: Leeds, UK
