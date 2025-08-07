@@ -6,10 +6,10 @@ This project simulates a personalised marketing engine using serverless AWS tool
 ---
 
 ## 🧠 Architecture Overview
-![Figure 1 – Architecture Diagram](Figure%201.png)
+
 **Figure 1: High-Level Architecture Diagram**  
 *This figure shows how user interest data flows from the frontend through API Gateway to Lambda, DynamoDB, and back. It also shows CloudWatch logging for tracing requests and a custom metrics alarm.*  
-`![Figure A.1 Placeholder – Insert image URL here]`
+![Figure 1 – Architecture Diagram](Figure%201.png)
 
 ---
 
@@ -84,43 +84,42 @@ def lambda_handler(event, context):
 ---
 
 ## 📊 CloudWatch Monitoring & Metrics
-![Figure 2 – InsertError Alarm](Figure%202.png)
+
 **Figure 2: CloudWatch Alarm for InsertError**  
 *Shows alarm triggering on Lambda insert failures.*  
-`![Figure A.2 Placeholder – Insert image URL here]`
+![Figure 2 – InsertError Alarm](Figure%202.png)
 
-**Figure 3: Logging level in API Gateway**  
+**Figure .3: Logging level in API Gateway**  
 *Shows log level updated to 'Errors and info' with execution logging enabled.*  
-`![Figure A.3 Placeholder – Insert image URL here]`
+![Figure .3 – API Gateway Logging](Figure%203.png)
 
-**Figure A.4: Enabling X-Ray tracing in Lambda**  
+**Figure .4: Enabling X-Ray tracing in Lambda**  
 *Enables request tracing across API Gateway → Lambda → DynamoDB.*  
-`![Figure A.4 Placeholder – Insert image URL here]`
+![Figure .4 – X-Ray Tracing](Figure%204.png)
 
-**Figure A.5: CloudWatch log showing full end-to-end receipt**  
+**Figure .5: CloudWatch log showing full end-to-end receipt**  
 *Confirms data ingestion, storage, and log stream completion.*  
-`![Figure A.5 Placeholder – Insert image URL here]`
+![Figure .5 – End-to-End Log](Figure%205.png)
 
-**Figure A.6: Custom CloudWatch metric for success tracking**  
+**Figure .6: Custom CloudWatch metric for success tracking**  
 *Tracks successful customer interest submissions.*  
-`![Figure A.6 Placeholder – Insert image URL here]`
+![Figure .6 – CloudWatch Success Metric](Figure%206.png)
 
-**Figure A.7: Dev stage with logging and tracing enabled**  
+**Figure .7: Dev stage with logging and tracing enabled**  
 *Shows settings on the API Gateway stage level.*  
-`![Figure A.7 Placeholder – Insert image URL here]`
+![Figure .7 – Dev Stage Logging](Figure%207.png)
 
-**Figure A.8: API test result in Postman**  
+**Figure .8: API test result in Postman**  
 *Postman POST response confirms end-to-end delivery and response.*  
-`![Figure A.8 Placeholder – Insert image URL here]`
+![Figure .8 – Postman Test](Figure%208.png)
 
-**Figure A.9: DynamoDB table view**  
+**Figure .9: DynamoDB table view**  
 *Shows structure of CustomerInterest table: customer_id, timestamp, interest, location.*  
-`![Figure A.9 Placeholder – Insert image URL here]`
+![Figure .9 – DynamoDB Table](Figure%209.png)
 
-**Figure A.10: CloudWatch Logs Summary View**  
+**Figure .10: CloudWatch Logs Summary View**  
 *Aggregated view showing Lambda logs for multiple inserts.*  
-`![Figure A.10 Placeholder – Insert image URL here]`
-
+![Figure .10 – CloudWatch Summary](Figure%2010.png)
 ---
 
 ## 🔐 IAM & Security
