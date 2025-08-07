@@ -43,10 +43,11 @@ This project simulates a personalised marketing engine using serverless AWS tool
   "interest": "electronics",
   "location": "Cape Town"
 }
-📂 Lambda Function Snippet (Python)
+Lambda Function Snippet (Python)
 python
+Always show details
+
 Copy
-Edit
 import boto3
 import json
 import os
@@ -68,15 +69,12 @@ def lambda_handler(event, context):
 📊 CloudWatch Monitoring & Logs
 Figure A.2 – InsertError Alarm Configuration
 Shows CloudWatch alarm setup for failed insertions in Lambda logs. This ensures real-time notification of function errors affecting customer data handling.
-![Figure A.2 Placeholder – Insert image URL here]
 
 Figure A.3 – API Gateway Logging Enabled
 CloudWatch log level is changed from Off to “Errors and Info”, enabling both success and error logs for all incoming API requests.
-![Figure A.3 Placeholder – Insert image URL here]
 
 Figure A.4 – API Gateway Tracing Activated
 X-Ray tracing enabled through API Gateway for the recommendation API. This helps track end-to-end request journeys for performance insights.
-![Figure A.4 Placeholder – Insert image URL here]
 
 Figure A.5 – Full Observability Enabled (API Gateway)
 This screenshot shows the active state of all observability settings after configuration.
@@ -84,30 +82,24 @@ Under the Logs and Tracing panel:
 • CloudWatch Logs set to Errors and info
 • Detailed Metrics shown as Active
 • Data Tracing marked as Active
-![Figure A.5 Placeholder – Insert image URL here]
 
 Figure A.6 – CloudWatch Metrics for Success Tracking
 Visualises a custom CloudWatch metric tracking successful Lambda executions, confirming API health over time.
-![Figure A.6 Placeholder – Insert image URL here]
 
 Figure A.7 – Default Logs and Tracing Configuration
 Shows the default API Gateway stage settings before observability configuration. Logging, tracing, and metrics are disabled at this stage.
-![Figure A.7 Placeholder – Insert image URL here]
 
 Figure A.8 – Successful Logging Update Notification
 Confirms CloudWatch Logs, Metrics, and Tracing were successfully enabled for the dev stage of the API Gateway.
-![Figure A.8 Placeholder – Insert image URL here]
 
 Figure A.9 – Final Observability State (Post-Configuration)
 Logs and Tracing configuration panel after enabling all options.
 • CloudWatch Logs: Errors and Info
 • Metrics: Enabled
 • Tracing: Active (X-Ray)
-![Figure A.9 Placeholder – Insert image URL here]
 
 Figure A.10 – CloudWatch Dashboard (LiveLoungeAPI)
 Confirms real-time observability with API latency, error rate, and invocation count tracking.
-![Figure A.10 Placeholder – Insert image URL here]
 
 ✅ Monitoring Summary
 Metric	Description	Threshold
@@ -132,8 +124,9 @@ Add mobile push via Amazon Pinpoint
 
 📁 Suggested Repo Structure
 python
+Always show details
+
 Copy
-Edit
 customer-personalisation-api/
 ├── lambda/                    # Lambda function code
 ├── docs/                     # Diagrams and screenshots
