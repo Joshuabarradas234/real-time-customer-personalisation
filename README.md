@@ -6,7 +6,7 @@ This project simulates a personalised marketing engine using serverless AWS tool
 ---
 
 ## 🧠 Architecture Overview
-
+![Figure A.1 – Architecture Diagram](Figure%201.png)
 **Figure A.1: High-Level Architecture Diagram**  
 *This figure shows how user interest data flows from the frontend through API Gateway to Lambda, DynamoDB, and back. It also shows CloudWatch logging for tracing requests and a custom metrics alarm.*  
 `![Figure A.1 Placeholder – Insert image URL here]`
@@ -84,7 +84,7 @@ def lambda_handler(event, context):
 ---
 
 ## 📊 CloudWatch Monitoring & Metrics
-
+![Figure A.2 – InsertError Alarm](Figure%202.png)
 **Figure A.2: CloudWatch Alarm for InsertError**  
 *Shows alarm triggering on Lambda insert failures.*  
 `![Figure A.2 Placeholder – Insert image URL here]`
