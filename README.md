@@ -7,7 +7,7 @@ This project simulates a personalised marketing engine using serverless AWS tool
 
 ## 🧠 Architecture Overview
 
-**Figure A.1: High-Level Architecture Diagram**  
+**Figure A.1: Architecture of the real-time personalized recommendation system on AWS**  
 *This figure shows how user interest data flows from the frontend through API Gateway to Lambda, DynamoDB, and back. It also shows CloudWatch logging for tracing requests and a custom metrics alarm.*  
 ![Figure A.1 – Architecture Diagram](Figure%201.png)
 
@@ -85,35 +85,35 @@ def lambda_handler(event, context):
 
 ## 📊 CloudWatch Monitoring & Metrics
 
-**Figure A.2: CloudWatch Alarm for InsertError**  
+**Figure A.2: : AWS API Gateway “Logs and Tracing” settings (initial state) for the dev deployment stage of the recommendation API**
 *Shows alarm triggering on Lambda insert failures.*  
 ![Figure A.2 – InsertError Alarm](Figure%202.png)
 
-**Figure A.3: Logging level in API Gateway**  
+**Figure A.3: : Updating the log level in API Gateway to “Errors and info”**  
 *Shows log level updated to 'Errors and info' with execution logging enabled.*  
 ![Figure A.3 – API Gateway Logging](Figure%203.png)
 
-**Figure A.4: Enabling X-Ray tracing in Lambda**  
+**Figure A.4: Confirmation of successful logging update in API Gateway**  
 *Enables request tracing across API Gateway → Lambda → DynamoDB.*  
 ![Figure A.4 – X-Ray Tracing](Figure%204.png)
 
-**Figure A.5: CloudWatch log showing full end-to-end receipt**  
+**Figure A.5: : Logs and Tracing configuration panel after enabling all options**  
 *Confirms data ingestion, storage, and log stream completion.*  
 ![Figure A.5 – End-to-End Log](Figure%205.png)
 
-**Figure A.6: Custom CloudWatch metric for success tracking**  
+**Figure A.6: : CloudWatch verification of enabled logging for the LiveLoungeAPI**  
 *Tracks successful customer interest submissions.*  
 ![Figure A.6 – CloudWatch Success Metric](Figure%206.png)
 
-**Figure A.7: Dev stage with logging and tracing enabled**  
+**Figure A.7: Logs & Tracing Settings Page**  
 *Shows settings on the API Gateway stage level.*  
 ![Figure A.7 – Dev Stage Logging](Figure%207.png)
 
-**Figure A.8: API test result in Postman**  
+**Figure A.8:Successful Logging Update Notification**  
 *Postman POST response confirms end-to-end delivery and response.*  
 ![Figure A.8 – Postman Test](Figure%208.png)
 
-**Figure A.9: DynamoDB table view**  
+**Figure A.9: Logs & Tracing Section of the dev Stage (Post-Configuration)**  
 *Shows structure of CustomerInterest table: customer_id, timestamp, interest, location.*  
 ![Figure A.9 – DynamoDB Table](Figure%209.png)
 
