@@ -8,7 +8,9 @@ This project simulates a personalised marketing engine using serverless AWS tool
 ## 🧠 Architecture Overview
 
 **Figure 1: High-Level Architecture Diagram**  
-*This figure shows how user interest data flows from the frontend through API Gateway to Lambda, DynamoDB, and back. It also shows CloudWatch logging for tracing requests and a custom metrics alarm.*  
+*Architecture of the real-time personalized recommendation system on AWS. The workflow includes an API Gateway endpoint (/recommend) protected by an API Key (usage plan), invoking a Lambda function that calls Amazon Personalize to get product recommendations. Amazon CloudWatch is used for logging and monitoring (execution logs and metrics), ensuring the system’s operations are observable and reliable
+<img width="468" height="69" alt="image" src="https://github.com/user-attachments/assets/8ae1ce57-344d-4588-85ff-4fa52d7014ad" />
+.*  
 ![Figure 1 – Architecture Diagram](Figure%201.png)
 
 ---
