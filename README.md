@@ -8,7 +8,7 @@ This project simulates a personalised marketing engine using serverless AWS tool
 ## 🧠 Architecture Overview
 
 **Figure A.1: Architecture of the real-time personalized recommendation system on AWS**  
-*This figure shows how user interest data flows from the frontend through API Gateway to Lambda, DynamoDB, and back. It also shows CloudWatch logging for tracing requests and a custom metrics alarm.*  
+*The workflow includes an API Gateway endpoint (/recommend) protected by an API Key (usage plan), invoking a Lambda function that calls Amazon Personalize to get product recommendations. Amazon CloudWatch is used for logging and monitoring (execution logs and metrics), ensuring the system’s operations are observable and reliable.*  
 ![Figure A.1 – Architecture Diagram](Figure%201.png)
 
 ---
@@ -86,11 +86,11 @@ def lambda_handler(event, context):
 ## 📊 CloudWatch Monitoring & Metrics
 
 **Figure A.2: : AWS API Gateway “Logs and Tracing” settings (initial state) for the dev deployment stage of the recommendation API**
-*Shows alarm triggering on Lambda insert failures.*  
+*At this stage, CloudWatch Logs are disabled and no detailed metrics or tracing are enabled – this is the default configuration before any monitoring features are turned on.*  
 ![Figure A.2 – InsertError Alarm](Figure%202.png)
 
 **Figure A.3: : Updating the log level in API Gateway to “Errors and info”**  
-*Shows log level updated to 'Errors and info' with execution logging enabled.*  
+*”. In this screenshot, the CloudWatch log level is being changed from Off to Errors and Info, which enables capturing both successful requests and errors. This step is part of configuring the API Gateway to record detailed execution information for the recommendation service.*  
 ![Figure A.3 – API Gateway Logging](Figure%203.png)
 
 **Figure A.4: Confirmation of successful logging update in API Gateway**  
