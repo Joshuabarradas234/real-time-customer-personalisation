@@ -94,31 +94,37 @@ def lambda_handler(event, context):
 ![Figure A.3 – API Gateway Logging](Figure%203.png)
 
 **Figure A.4: Confirmation of successful logging update in API Gateway**  
-*Enables request tracing across API Gateway → Lambda → DynamoDB.*  
+*After saving the settings, AWS provides a notification confirming that logging and tracing have been enabled for the stage. This includes enabling CloudWatch Logs at the specified level, turning on Detailed Metrics, and activating X-Ray tracing for request workflows.*  
 ![Figure A.4 – X-Ray Tracing](Figure%204.png)
 
 **Figure A.5: : Logs and Tracing configuration panel after enabling all options**  
-*Confirms data ingestion, storage, and log stream completion.*  
+*This screenshot shows that CloudWatch Logs are now set to capture Errors and Info, Detailed Metrics collection is active, and Data Tracing (X-Ray) is enabled for the dev stage. The API is now fully instrumented to collect performance and diagnostic data.*  
 ![Figure A.5 – End-to-End Log](Figure%205.png)
 
 **Figure A.6: : CloudWatch verification of enabled logging for the LiveLoungeAPI**  
-*Tracks successful customer interest submissions.*  
+*This view confirms that the LiveLoungeAPI’s CloudWatch log group and metrics are receiving data. With logging and monitoring active, the team can use CloudWatch dashboards, set up alarms for high error rates or latency, and perform root cause analysis on any invocation issues in the recommendation system.*  
 ![Figure A.6 – CloudWatch Success Metric](Figure%206.png)
 
 **Figure A.7: Logs & Tracing Settings Page**  
-*Shows settings on the API Gateway stage level.*  
+*This screenshot shows the default Logs and Tracing settings for the dev stage of the LiveLoungeAPI in API Gateway. At this point, CloudWatch logs are disabled, and metrics or tracing options have not been activated yet. This serves as the initial baseline prior to enabling observability features.*  
 ![Figure A.7 – Dev Stage Logging](Figure%207.png)
 
 **Figure A.8:Successful Logging Update Notification**  
-*Postman POST response confirms end-to-end delivery and response.*  
+*This image confirms that logging and tracing settings were successfully updated for the dev stage. This includes enabling:
+•	CloudWatch Logs (errors and info)
+•	Detailed Metrics for latency and error monitoring
+•	Data Tracing for full execution details per request*  
 ![Figure A.8 – Postman Test](Figure%208.png)
 
 **Figure A.9: Logs & Tracing Section of the dev Stage (Post-Configuration)**  
-*Shows structure of CustomerInterest table: customer_id, timestamp, interest, location.*  
+*This screenshot shows the active state of all observability settings after configuration. Under the Logs and Tracing panel:
+•	CloudWatch Logs are set to Errors and info logs
+•	Detailed Metrics are shown as Active
+•	Data Tracing is marked as Active, capturing full lifecycle traces for each API request*  
 ![Figure A.9 – DynamoDB Table](Figure%209.png)
 
-**Figure A.10: CloudWatch Logs Summary View**  
-*Aggregated view showing Lambda logs for multiple inserts.*  
+**Figure A.10: Enabled CloudWatch Logging Display**  
+*This final view confirms that CloudWatch observability features are fully operational for the LiveLoungeAPI. These settings allow real-time API monitoring via AWS CloudWatch, enabling dashboards, custom alarms, and root cause analysis for failed or slow requests.*  
 ![Figure A.10 – CloudWatch Summary](Figure%2010.png)
 
 ---
